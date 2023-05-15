@@ -1,0 +1,7 @@
+C:\Users\Kalista\source\repos\RedBadgeProject\webapi\obj\Debug\net7.0\webapi - Backup.csproj.AssemblyReference.cache
+C:\Users\Kalista\source\repos\RedBadgeProject\webapi\obj\Debug\net7.0\webapi - Backup.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Kalista\source\repos\RedBadgeProject\webapi\obj\Debug\net7.0\webapi - Backup.AssemblyInfoInputs.cache
+C:\Users\Kalista\source\repos\RedBadgeProject\webapi\obj\Debug\net7.0\webapi - Backup.AssemblyInfo.cs
+C:\Users\Kalista\source\repos\RedBadgeProject\webapi\obj\Debug\net7.0\webapi - Backup.csproj.CoreCompileInputs.cache
+C:\Users\Kalista\source\repos\RedBadgeProject\webapi\obj\Debug\net7.0\webapi - Backup.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Kalista\source\repos\RedBadgeProject\webapi\obj\Debug\net7.0\webapi - Backup.MvcApplicationPartsAssemblyInfo.cache

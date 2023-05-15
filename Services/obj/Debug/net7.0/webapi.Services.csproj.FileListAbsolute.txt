@@ -1,0 +1,12 @@
+C:\Users\Kalista\source\repos\RedBadgeProject\Services\bin\Debug\net7.0\webapi.Services.deps.json
+C:\Users\Kalista\source\repos\RedBadgeProject\Services\bin\Debug\net7.0\webapi.Services.dll
+C:\Users\Kalista\source\repos\RedBadgeProject\Services\bin\Debug\net7.0\webapi.Services.pdb
+C:\Users\Kalista\source\repos\RedBadgeProject\Services\obj\Debug\net7.0\webapi.Services.csproj.AssemblyReference.cache
+C:\Users\Kalista\source\repos\RedBadgeProject\Services\obj\Debug\net7.0\webapi.Services.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Kalista\source\repos\RedBadgeProject\Services\obj\Debug\net7.0\webapi.Services.AssemblyInfoInputs.cache
+C:\Users\Kalista\source\repos\RedBadgeProject\Services\obj\Debug\net7.0\webapi.Services.AssemblyInfo.cs
+C:\Users\Kalista\source\repos\RedBadgeProject\Services\obj\Debug\net7.0\webapi.Services.csproj.CoreCompileInputs.cache
+C:\Users\Kalista\source\repos\RedBadgeProject\Services\obj\Debug\net7.0\webapi.Services.dll
+C:\Users\Kalista\source\repos\RedBadgeProject\Services\obj\Debug\net7.0\refint\webapi.Services.dll
+C:\Users\Kalista\source\repos\RedBadgeProject\Services\obj\Debug\net7.0\webapi.Services.pdb
+C:\Users\Kalista\source\repos\RedBadgeProject\Services\obj\Debug\net7.0\ref\webapi.Services.dll
