@@ -1,7 +1,13 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Data",
+    "\\Models",
+    "\\reactapp",
+    "\\Services",
+    "\\Services\\Login",
+    "\\webapi"
   ],
-  "SelectedNode": "\\RedBadgeProject.sln",
+  "SelectedNode": "\\webapi\\Program.cs",
   "PreviewInSolutionExplorer": false
 }

@@ -1,0 +1,14 @@
+C:\Users\Kalista\source\repos\RedBadgeProject\Data\bin\Release\net7.0\webapi.Data.deps.json
+C:\Users\Kalista\source\repos\RedBadgeProject\Data\bin\Release\net7.0\webapi.Data.runtimeconfig.json
+C:\Users\Kalista\source\repos\RedBadgeProject\Data\bin\Release\net7.0\webapi.Data.dll
+C:\Users\Kalista\source\repos\RedBadgeProject\Data\bin\Release\net7.0\webapi.Data.pdb
+C:\Users\Kalista\source\repos\RedBadgeProject\Data\obj\Release\net7.0\webapi.Data.csproj.AssemblyReference.cache
+C:\Users\Kalista\source\repos\RedBadgeProject\Data\obj\Release\net7.0\webapi.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Kalista\source\repos\RedBadgeProject\Data\obj\Release\net7.0\webapi.Data.AssemblyInfoInputs.cache
+C:\Users\Kalista\source\repos\RedBadgeProject\Data\obj\Release\net7.0\webapi.Data.AssemblyInfo.cs
+C:\Users\Kalista\source\repos\RedBadgeProject\Data\obj\Release\net7.0\webapi.Data.csproj.CoreCompileInputs.cache
+C:\Users\Kalista\source\repos\RedBadgeProject\Data\obj\Release\net7.0\webapi.Data.dll
+C:\Users\Kalista\source\repos\RedBadgeProject\Data\obj\Release\net7.0\refint\webapi.Data.dll
+C:\Users\Kalista\source\repos\RedBadgeProject\Data\obj\Release\net7.0\webapi.Data.pdb
+C:\Users\Kalista\source\repos\RedBadgeProject\Data\obj\Release\net7.0\webapi.Data.genruntimeconfig.cache
+C:\Users\Kalista\source\repos\RedBadgeProject\Data\obj\Release\net7.0\ref\webapi.Data.dll

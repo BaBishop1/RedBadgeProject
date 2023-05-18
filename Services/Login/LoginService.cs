@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using webapi.Data.Entities;
@@ -23,7 +24,7 @@ namespace webapi.Services.Login
 
         public async Task<bool> CreateLoginAsync(LoginCreate model)
         {
-            if(_dbcontext.Logins.Where(login => login.Username == model.Username).FirstOrDefault() == null)
+            if(_dbcontext.Logins.Where(login => login.Username == model.Username).FirstOrDefault(c => c.Username == model.Username) != null)
             {
                 return false;
             }
@@ -55,28 +56,70 @@ namespace webapi.Services.Login
                 int numberOfChanges = await _dbcontext.SaveChangesAsync();
                 return numberOfChanges == 1;
             }
-            int counter = await _dbcontext.SaveChangesAsync();
-            return counter == 1;
+            else
+            {
+                return false;
+            }
         }
 
-        public Task<bool> DeleteLoginAsync(int id)
+        public async Task<LoginDetail> GetLoginByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            LoginEntity login = await _dbcontext.Logins.FirstOrDefaultAsync(x => x.Id == id);
+            if (login == null)
+            {
+                return null;
+            }
+            LoginDetail loginDetail = new LoginDetail
+            {
+                Id = login.Id,
+                Username = login.Username,
+                Email = login.Email,
+            };
+            return loginDetail;
         }
 
-        public Task<bool> GetLoginByIdAsync(int id)
+        public async Task<IEnumerable<LoginListItem>> GetLoginListAsync()
         {
-            throw new NotImplementedException();
+            IEnumerable<LoginListItem> logins = await _dbcontext.Logins.Select(entity => new LoginListItem
+            {
+                Role = entity.GetType().Name,
+                Id = entity.Id,
+                Username = entity.Username
+            }).ToListAsync();
+            return logins;
         }
 
-        public Task<IEnumerable<LoginListItem>> GetLoginListAsync()
+        public async Task<bool> UpdateLoginAsync(LoginUpdate model)
         {
-            throw new NotImplementedException();
+            LoginEntity login = _dbcontext.Logins.FirstOrDefault(x => x.Id == model.Id);
+            if (login == null)
+            {
+                return false;
+            }
+            else
+            {
+                login.Id = model.Id;
+                login.Username = model.Username;
+                login.Email = model.Email;
+                login.Password = model.Password;
+            }
+            var numberOfChanges = await _dbcontext.SaveChangesAsync();
+            return numberOfChanges == 1;
         }
 
-        public Task<bool> UpdateLoginAsync(LoginUpdate model)
+        public async Task<bool> DeleteLoginAsync(int id)
         {
-            throw new NotImplementedException();
+            LoginEntity login = _dbcontext.Logins.FirstOrDefault(x => x.Id == id);
+            if (login == null)
+            {
+                return false;
+            }
+            else
+            {
+                _dbcontext.Logins.Remove(login);
+                int numberOfChanges = await _dbcontext.SaveChangesAsync();
+                return numberOfChanges == 1;
+            }
         }
     }
 }

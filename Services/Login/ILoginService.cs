@@ -10,7 +10,7 @@ namespace webapi.Services.Login
     public interface ILoginService
     {
         Task<bool> CreateLoginAsync(LoginCreate model);
-        Task<bool> GetLoginByIdAsync(int id);
+        Task<LoginDetail> GetLoginByIdAsync(int id);
         Task<IEnumerable<LoginListItem>> GetLoginListAsync();
         Task<bool> UpdateLoginAsync(LoginUpdate model);
         Task<bool> DeleteLoginAsync(int id);

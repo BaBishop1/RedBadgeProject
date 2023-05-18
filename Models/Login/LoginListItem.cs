@@ -9,6 +9,7 @@ namespace webapi.Models.Login
 {
     public class LoginListItem
     {
+        public string Role {get; set;}
         public int Id { get; set; }
         public string Username { get; set; }
     }
