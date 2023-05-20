@@ -19,10 +19,6 @@ namespace webapi.Models.Games
         [Required]
         public string GameDescription { get; set; }
         [Required]
-        public List<GenreEntity> Genres { get; set; }
-        [Required]
-        public List<ReviewEntity> Reviews { get; set; }
-        [Required]
         public DateTimeOffset DateUploaded { get; set; }
     }
 }

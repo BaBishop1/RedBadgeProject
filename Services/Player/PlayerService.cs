@@ -1,37 +1,93 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using webapi.Data.Entities;
 using webapi.Models.Players;
+using webapi.webapi.Data;
 
 namespace webapi.Services.Player
 {
     public class PlayerService : IPlayerService
     {
-        public Task<bool> CreatePlayerAsync(PlayerCreate model)
+        private readonly ApplicationDbContext _dbcontext;
+
+        public PlayerService(ApplicationDbContext dbcontext)
         {
-            throw new NotImplementedException();
+            _dbcontext = dbcontext;
         }
 
-        public Task<bool> DeletePlayerAsync(int playerId)
+        public async Task<bool> CreatePlayerAsync(PlayerCreate model)
         {
-            throw new NotImplementedException();
+            PlayerEntity doesExist = await _dbcontext.Players.FirstOrDefaultAsync(x => x.DisplayName == model.DisplayName);
+            if (doesExist != null)
+            {
+                return false;
+            }
+            PlayerEntity playerEntity = new PlayerEntity
+            {
+                DisplayName = model.DisplayName,
+            };
+            _dbcontext.Players.Add(playerEntity);
+            int numberOfChanges = await _dbcontext.SaveChangesAsync();
+            return numberOfChanges == 1;
         }
 
-        public Task<PlayerDetail> GetPlayerById(int playerId)
+        public async Task<PlayerDetail> GetPlayerByIdAsync(int playerId)
         {
-            throw new NotImplementedException();
+            PlayerEntity player = await _dbcontext.Players.FirstOrDefaultAsync(x => x.PlayerId == playerId);
+            if (player == null)
+            {
+                return null;
+            }
+            PlayerDetail playerDetail = new PlayerDetail
+            {
+                PlayerId = player.PlayerId,
+                DisplayName = player.DisplayName,
+            };
+            return playerDetail;
         }
 
-        public Task<IEnumerable<PlayerListItem>> GetPlayerListAsync()
+        public async Task<IEnumerable<PlayerListItem>> GetPlayerListAsync()
         {
-            throw new NotImplementedException();
+            IEnumerable<PlayerListItem> players = await _dbcontext.Players.Select(entity => new PlayerListItem
+            {
+                PlayerId = entity.PlayerId,
+                DisplayName = entity.DisplayName,
+            }).ToListAsync();
+            return players;
         }
 
-        public Task<bool> UpdatePlayerInfoAsync(PlayerUpdate model)
+        public async Task<bool> UpdatePlayerAsync(int playerId, PlayerUpdate model)
         {
-            throw new NotImplementedException();
+            PlayerEntity player = _dbcontext.Players.FirstOrDefault(x => x.PlayerId == playerId);
+            if (player == null)
+            {
+                return false;
+            }
+            else
+            {
+                player.DisplayName = model.DisplayName;
+            }
+            var numberOfChanges = await _dbcontext.SaveChangesAsync();
+            return numberOfChanges == 1;
+        }
+
+        public async Task<bool> DeletePlayerAsync(int playerId)
+        {
+            PlayerEntity player = _dbcontext.Players.FirstOrDefault(x => x.PlayerId == playerId);
+            if (player == null)
+            {
+                return false;
+            }
+            else
+            {
+                _dbcontext.Players.Remove(player);
+                int numberOfChanges = await _dbcontext.SaveChangesAsync();
+                return numberOfChanges == 1;
+            }
         }
     }
 }

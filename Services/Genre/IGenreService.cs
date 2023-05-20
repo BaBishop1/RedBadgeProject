@@ -12,7 +12,7 @@ namespace webapi.Services.Genre
         Task<bool> CreateGenreAsync(GenreCreate model);
         Task<GenreDetail> GetGenreByIdAsync(int genreId);
         Task<IEnumerable<GenreListItem>> GetGenreListAsync();
-        Task<bool> UpdateGenreInfoAsync(GenreUpdate model);
+        Task<bool> UpdateGenreAsync(int genreId, GenreUpdate model);
         Task<bool> DeleteGenreAsync(int genreId);
 
     }

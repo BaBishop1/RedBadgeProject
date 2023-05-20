@@ -11,7 +11,7 @@ namespace webapi.Models.Players
     public class PlayerUpdate
     {
         [Required]
-        public int PLayerId { get; set; }
+        public int PlayerId { get; set; }
         public string DisplayName { get; set; }
         public  List<GameEntity> FavoriteGames { get; set; }
     }

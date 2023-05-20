@@ -24,17 +24,17 @@ namespace webapi.Services.Login
 
         public async Task<bool> CreateLoginAsync(LoginCreate model)
         {
-            if(_dbcontext.Logins.Where(login => login.Username == model.Username).FirstOrDefault(c => c.Username == model.Username) != null)
+            if (_dbcontext.Logins.Where(login => login.Username == model.Username).FirstOrDefault(c => c.Username == model.Username) != null)
             {
                 return false;
             }
 
-            if (model.Role.ToLower() == "admin") 
+            if (model.Role.ToLower() == "admin")
             {
                 AdminEntity adminEntity = new AdminEntity
                 {
-                Username = model.Username,
-                Email = model.Email,
+                    Username = model.Username,
+                    Email = model.Email,
                 };
                 PasswordHasher<AdminEntity> passwordHasher = new PasswordHasher<AdminEntity>();
                 adminEntity.Password = passwordHasher.HashPassword(adminEntity, model.Password);
@@ -42,16 +42,16 @@ namespace webapi.Services.Login
                 int numberOfChanges = await _dbcontext.SaveChangesAsync();
                 return numberOfChanges == 1;
             }
-            
+
             if (model.Role.ToLower() == "User")
             {
                 UserEntity userEntity = new UserEntity
                 {
-                    Username= model.Username,
+                    Username = model.Username,
                     Email = model.Email,
                 };
                 PasswordHasher<UserEntity> passwordHasher = new PasswordHasher<UserEntity>();
-                userEntity.Password =passwordHasher.HashPassword(userEntity, model.Password);
+                userEntity.Password = passwordHasher.HashPassword(userEntity, model.Password);
                 _dbcontext.Logins.Add(userEntity);
                 int numberOfChanges = await _dbcontext.SaveChangesAsync();
                 return numberOfChanges == 1;

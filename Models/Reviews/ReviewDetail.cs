@@ -13,7 +13,6 @@ namespace webapi.Models.Reviews
     {
         public int ReviewId { get; set; }
         public int GameId { get; set; }
-        public string GameTitle { get; set; }
         public double GameScore { get; set; }
         public string ReviewText { get; set; }
     }

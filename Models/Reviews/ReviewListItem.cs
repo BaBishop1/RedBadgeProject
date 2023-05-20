@@ -8,8 +8,8 @@ namespace webapi.Models.Reviews
 {
     public class ReviewListItem
     {
+        public int GameId { get; set; }
         public int ReviewId { get; set; }
-        public string GameTitle { get; set; }
         public double GameScore { get; set; }
     }
 }

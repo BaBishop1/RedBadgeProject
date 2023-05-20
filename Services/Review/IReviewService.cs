@@ -12,7 +12,7 @@ namespace webapi.Services.Review
         Task<bool> CreateReviewAsync(ReviewCreate model);
         Task<ReviewDetail> GetReviewByIdAsync(int reviewId);
         Task<IEnumerable<ReviewListItem>> GetReviewListByGameIdAsync(int gameId);
-        Task<bool> UpdateReviewInfoAsync(ReviewUpdate model);
+        Task<bool> UpdateReviewAsync(int reviewId, ReviewUpdate model);
         Task<bool> DeleteReviewAsync(int reviewId);
     }
 }

@@ -10,10 +10,10 @@ namespace webapi.Services.Game
     public interface IGameService
     {
         Task<bool> CreateGameAsync(GameCreate model);
-        Task<GameDetail> GetGameDetailByIdAsync(int gameId);
+        Task<GameDetail> GetGameByIdAsync(int gameId);
         Task<IEnumerable<GameListItem>> GetGameListByCreatorAsync(int creatorId);
-        Task<bool> UpdateGameInfoAsync(GameUpdate model);
-        Task<bool> DeleteGameInfoAsync(int gameId);
+        Task<bool> UpdateGameAsync(int gameId, GameUpdate model);
+        Task<bool> DeleteGameAsync(int gameId);
 
     }
 }

@@ -12,6 +12,6 @@ namespace webapi.Models.Creators
         [Required]
         public int CreatorId { get; set; }
         [Required]
-        public string DisplayName;
+        public string DisplayName { get; set; }
     }
 }

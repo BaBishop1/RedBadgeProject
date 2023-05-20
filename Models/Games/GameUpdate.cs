@@ -11,7 +11,7 @@ namespace webapi.Models.Games
     public class GameUpdate
     {
         [Required]
-        public int GameId { get; set; }
+        public int CreatorId { get; set; }
         public string GameTitle { get; set; }
         public string GameDescription { get; set; }
         public List<GenreEntity> Genres { get; set; }

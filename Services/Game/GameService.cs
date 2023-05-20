@@ -1,37 +1,102 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using webapi.Data.Entities;
 using webapi.Models.Games;
+using webapi.Models.Games;
+using webapi.webapi.Data;
 
 namespace webapi.Services.Game
 {
     public class GameService : IGameService
     {
-        public Task<bool> CreateGameAsync(GameCreate model)
+        private readonly ApplicationDbContext _dbcontext;
+
+        public GameService(ApplicationDbContext dbcontext)
         {
-            throw new NotImplementedException();
+            _dbcontext = dbcontext;
+        }
+        public async Task<bool> CreateGameAsync(GameCreate model)
+        {
+            CreatorEntity creatorExists = await _dbcontext.Creators.FirstOrDefaultAsync(x => x.CreatorId == model.CreatorId);
+            GameEntity doesExist = await _dbcontext.Games.FirstOrDefaultAsync(x => x.GameTitle == model.GameTitle);
+            if (doesExist != null)
+            {
+                return false;
+            }
+            GameEntity gameEntity = new GameEntity
+            {
+                CreatorId = model.CreatorId,
+                GameTitle = model.GameTitle,
+                GameDescription = model.GameDescription,
+                DateUploaded = model.DateUploaded,
+            };
+            _dbcontext.Games.Add(gameEntity);
+            int numberOfChanges = await _dbcontext.SaveChangesAsync();
+            return numberOfChanges == 1;
         }
 
-        public Task<bool> DeleteGameInfoAsync(int gameId)
+        public async Task<GameDetail> GetGameByIdAsync(int gameId)
         {
-            throw new NotImplementedException();
+            GameEntity game = await _dbcontext.Games.FirstOrDefaultAsync(x => x.GameId == gameId);
+            if (game == null)
+            {
+                return null;
+            }
+            GameDetail gameDetail = new GameDetail
+            {
+                CreatorId = game.CreatorId,
+                GameId = game.GameId,
+                GameTitle = game.GameTitle,
+                GameDescription = game.GameDescription,
+                Genres = game.Genres,
+            };
+            return gameDetail;
         }
 
-        public Task<GameDetail> GetGameDetailByIdAsync(int gameId)
+        public async Task<IEnumerable<GameListItem>> GetGameListByCreatorAsync(int creatorId)
         {
-            throw new NotImplementedException();
+            IEnumerable<GameListItem> games = await _dbcontext.Games.Select(game => new GameListItem
+            {
+                GameId = game.GameId,
+                GameTitle = game.GameTitle,
+            }).ToListAsync();
+            return games;
         }
 
-        public Task<IEnumerable<GameListItem>> GetGameListByCreatorAsync(int creatorId)
+        public async Task<bool> UpdateGameAsync(int gameId, GameUpdate model)
         {
-            throw new NotImplementedException();
+            GameEntity game = _dbcontext.Games.FirstOrDefault(x => x.GameId == gameId);
+            if (game == null)
+            {
+                return false;
+            }
+            else
+            {
+                game.CreatorId = model.CreatorId;
+                game.GameTitle = model.GameTitle;
+                game.GameDescription = model.GameDescription;
+            }
+            var numberOfChanges = await _dbcontext.SaveChangesAsync();
+            return numberOfChanges == 1;
         }
 
-        public Task<bool> UpdateGameInfoAsync(GameUpdate model)
+        public async Task<bool> DeleteGameAsync(int gameId)
         {
-            throw new NotImplementedException();
+            GameEntity game = _dbcontext.Games.FirstOrDefault(x => x.GameId == gameId);
+            if (game == null)
+            {
+                return false;
+            }
+            else
+            {
+                _dbcontext.Games.Remove(game);
+                int numberOfChanges = await _dbcontext.SaveChangesAsync();
+                return numberOfChanges == 1;
+            }
         }
     }
 }

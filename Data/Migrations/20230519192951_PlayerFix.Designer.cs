@@ -12,8 +12,8 @@ using webapi.webapi.Data;
 namespace webapi.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230511153922_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20230519192951_PlayerFix")]
+    partial class PlayerFix
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -64,14 +64,9 @@ namespace webapi.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PlayerEntityPLayerId")
-                        .HasColumnType("int");
-
                     b.HasKey("GameId");
 
                     b.HasIndex("CreatorId");
-
-                    b.HasIndex("PlayerEntityPLayerId");
 
                     b.ToTable("Games");
                 });
@@ -87,9 +82,6 @@ namespace webapi.Data.Migrations
                     b.Property<int?>("GameEntityGameId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("GameEntityGameId1")
-                        .HasColumnType("int");
-
                     b.Property<string>("GenreDescription")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -101,8 +93,6 @@ namespace webapi.Data.Migrations
                     b.HasKey("GenreId");
 
                     b.HasIndex("GameEntityGameId");
-
-                    b.HasIndex("GameEntityGameId1");
 
                     b.ToTable("Genres");
                 });
@@ -142,17 +132,17 @@ namespace webapi.Data.Migrations
 
             modelBuilder.Entity("webapi.Data.Entities.PlayerEntity", b =>
                 {
-                    b.Property<int>("PLayerId")
+                    b.Property<int>("PlayerId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PLayerId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PlayerId"));
 
                     b.Property<string>("DisplayName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("PLayerId");
+                    b.HasKey("PlayerId");
 
                     b.ToTable("Players");
                 });
@@ -171,11 +161,15 @@ namespace webapi.Data.Migrations
                     b.Property<double>("GameScore")
                         .HasColumnType("float");
 
+                    b.Property<string>("ReviewText")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("ReviewId");
 
                     b.HasIndex("GameId");
 
-                    b.ToTable("Ratings");
+                    b.ToTable("Reviews");
                 });
 
             modelBuilder.Entity("webapi.Data.Entities.AdminEntity", b =>
@@ -200,10 +194,6 @@ namespace webapi.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("webapi.Data.Entities.PlayerEntity", null)
-                        .WithMany("FavoriteGames")
-                        .HasForeignKey("PlayerEntityPLayerId");
-
                     b.Navigation("Creator");
                 });
 
@@ -212,16 +202,12 @@ namespace webapi.Data.Migrations
                     b.HasOne("webapi.Data.Entities.GameEntity", null)
                         .WithMany("Genres")
                         .HasForeignKey("GameEntityGameId");
-
-                    b.HasOne("webapi.Data.Entities.GameEntity", null)
-                        .WithMany("Reviews")
-                        .HasForeignKey("GameEntityGameId1");
                 });
 
             modelBuilder.Entity("webapi.Data.Entities.ReviewEntity", b =>
                 {
                     b.HasOne("webapi.Data.Entities.GameEntity", "Game")
-                        .WithMany()
+                        .WithMany("Reviews")
                         .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -239,11 +225,6 @@ namespace webapi.Data.Migrations
                     b.Navigation("Genres");
 
                     b.Navigation("Reviews");
-                });
-
-            modelBuilder.Entity("webapi.Data.Entities.PlayerEntity", b =>
-                {
-                    b.Navigation("FavoriteGames");
                 });
 #pragma warning restore 612, 618
         }

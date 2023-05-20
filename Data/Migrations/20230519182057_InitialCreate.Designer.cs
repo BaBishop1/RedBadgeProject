@@ -12,8 +12,8 @@ using webapi.webapi.Data;
 namespace webapi.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230511154342_TestingChange")]
-    partial class TestingChange
+    [Migration("20230519182057_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -64,14 +64,9 @@ namespace webapi.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PlayerEntityPLayerId")
-                        .HasColumnType("int");
-
                     b.HasKey("GameId");
 
                     b.HasIndex("CreatorId");
-
-                    b.HasIndex("PlayerEntityPLayerId");
 
                     b.ToTable("Games");
                 });
@@ -166,11 +161,15 @@ namespace webapi.Data.Migrations
                     b.Property<double>("GameScore")
                         .HasColumnType("float");
 
+                    b.Property<string>("ReviewText")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("ReviewId");
 
                     b.HasIndex("GameId");
 
-                    b.ToTable("Ratings");
+                    b.ToTable("Reviews");
                 });
 
             modelBuilder.Entity("webapi.Data.Entities.AdminEntity", b =>
@@ -194,10 +193,6 @@ namespace webapi.Data.Migrations
                         .HasForeignKey("CreatorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("webapi.Data.Entities.PlayerEntity", null)
-                        .WithMany("FavoriteGames")
-                        .HasForeignKey("PlayerEntityPLayerId");
 
                     b.Navigation("Creator");
                 });
@@ -230,11 +225,6 @@ namespace webapi.Data.Migrations
                     b.Navigation("Genres");
 
                     b.Navigation("Reviews");
-                });
-
-            modelBuilder.Entity("webapi.Data.Entities.PlayerEntity", b =>
-                {
-                    b.Navigation("FavoriteGames");
                 });
 #pragma warning restore 612, 618
         }

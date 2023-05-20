@@ -10,9 +10,9 @@ namespace webapi.Services.Player
     public interface IPlayerService
     {
         Task<bool> CreatePlayerAsync(PlayerCreate model);
-        Task<PlayerDetail> GetPlayerById(int playerId);
+        Task<PlayerDetail> GetPlayerByIdAsync(int playerId);
         Task<IEnumerable<PlayerListItem>> GetPlayerListAsync();
-        Task<bool> UpdatePlayerInfoAsync(PlayerUpdate model);
+        Task<bool> UpdatePlayerAsync(int playerId, PlayerUpdate model);
         Task<bool> DeletePlayerAsync(int playerId);
     }
 }

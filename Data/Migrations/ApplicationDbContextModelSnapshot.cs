@@ -61,14 +61,9 @@ namespace webapi.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PlayerEntityPLayerId")
-                        .HasColumnType("int");
-
                     b.HasKey("GameId");
 
                     b.HasIndex("CreatorId");
-
-                    b.HasIndex("PlayerEntityPLayerId");
 
                     b.ToTable("Games");
                 });
@@ -134,17 +129,17 @@ namespace webapi.Data.Migrations
 
             modelBuilder.Entity("webapi.Data.Entities.PlayerEntity", b =>
                 {
-                    b.Property<int>("PLayerId")
+                    b.Property<int>("PlayerId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PLayerId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PlayerId"));
 
                     b.Property<string>("DisplayName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("PLayerId");
+                    b.HasKey("PlayerId");
 
                     b.ToTable("Players");
                 });
@@ -171,7 +166,7 @@ namespace webapi.Data.Migrations
 
                     b.HasIndex("GameId");
 
-                    b.ToTable("Ratings");
+                    b.ToTable("Reviews");
                 });
 
             modelBuilder.Entity("webapi.Data.Entities.AdminEntity", b =>
@@ -195,10 +190,6 @@ namespace webapi.Data.Migrations
                         .HasForeignKey("CreatorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("webapi.Data.Entities.PlayerEntity", null)
-                        .WithMany("FavoriteGames")
-                        .HasForeignKey("PlayerEntityPLayerId");
 
                     b.Navigation("Creator");
                 });
@@ -231,11 +222,6 @@ namespace webapi.Data.Migrations
                     b.Navigation("Genres");
 
                     b.Navigation("Reviews");
-                });
-
-            modelBuilder.Entity("webapi.Data.Entities.PlayerEntity", b =>
-                {
-                    b.Navigation("FavoriteGames");
                 });
 #pragma warning restore 612, 618
         }

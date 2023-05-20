@@ -62,8 +62,7 @@ namespace webapi.Data.Migrations
                     CreatorId = table.Column<int>(type: "int", nullable: false),
                     GameTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     GameDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DateUploaded = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    PlayerEntityPLayerId = table.Column<int>(type: "int", nullable: true)
+                    DateUploaded = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -74,11 +73,6 @@ namespace webapi.Data.Migrations
                         principalTable: "Creators",
                         principalColumn: "CreatorId",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Games_Players_PlayerEntityPLayerId",
-                        column: x => x.PlayerEntityPLayerId,
-                        principalTable: "Players",
-                        principalColumn: "PLayerId");
                 });
 
             migrationBuilder.CreateTable(
@@ -89,8 +83,7 @@ namespace webapi.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     GenreName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     GenreDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    GameEntityGameId = table.Column<int>(type: "int", nullable: true),
-                    GameEntityGameId1 = table.Column<int>(type: "int", nullable: true)
+                    GameEntityGameId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -100,27 +93,23 @@ namespace webapi.Data.Migrations
                         column: x => x.GameEntityGameId,
                         principalTable: "Games",
                         principalColumn: "GameId");
-                    table.ForeignKey(
-                        name: "FK_Genres_Games_GameEntityGameId1",
-                        column: x => x.GameEntityGameId1,
-                        principalTable: "Games",
-                        principalColumn: "GameId");
                 });
 
             migrationBuilder.CreateTable(
-                name: "Ratings",
+                name: "Reviews",
                 columns: table => new
                 {
                     ReviewId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     GameId = table.Column<int>(type: "int", nullable: false),
-                    GameScore = table.Column<double>(type: "float", nullable: false)
+                    GameScore = table.Column<double>(type: "float", nullable: false),
+                    ReviewText = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Ratings", x => x.ReviewId);
+                    table.PrimaryKey("PK_Reviews", x => x.ReviewId);
                     table.ForeignKey(
-                        name: "FK_Ratings_Games_GameId",
+                        name: "FK_Reviews_Games_GameId",
                         column: x => x.GameId,
                         principalTable: "Games",
                         principalColumn: "GameId",
@@ -133,23 +122,13 @@ namespace webapi.Data.Migrations
                 column: "CreatorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Games_PlayerEntityPLayerId",
-                table: "Games",
-                column: "PlayerEntityPLayerId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Genres_GameEntityGameId",
                 table: "Genres",
                 column: "GameEntityGameId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Genres_GameEntityGameId1",
-                table: "Genres",
-                column: "GameEntityGameId1");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Ratings_GameId",
-                table: "Ratings",
+                name: "IX_Reviews_GameId",
+                table: "Reviews",
                 column: "GameId");
         }
 
@@ -163,16 +142,16 @@ namespace webapi.Data.Migrations
                 name: "Logins");
 
             migrationBuilder.DropTable(
-                name: "Ratings");
+                name: "Players");
+
+            migrationBuilder.DropTable(
+                name: "Reviews");
 
             migrationBuilder.DropTable(
                 name: "Games");
 
             migrationBuilder.DropTable(
                 name: "Creators");
-
-            migrationBuilder.DropTable(
-                name: "Players");
         }
     }
 }
