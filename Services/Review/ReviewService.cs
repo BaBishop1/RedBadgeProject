@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using webapi.Models.Reviews;
 using webapi.webapi.Data;
 using webapi.Data.Entities;
-using webapi.Models.Reviews;
 
 namespace webapi.Services.Review
 {
@@ -27,9 +26,10 @@ namespace webapi.Services.Review
             {
                 return false;
             }
+            GameEntity gameExists = await _dbcontext.Games.FindAsync(model.GameId);
             ReviewEntity reviewEntity = new ReviewEntity
             {
-                GameId = model.GameId,
+                GameId = gameExists.GameId,
                 GameScore = model.GameScore,
                 ReviewText = model.ReviewText,
             };

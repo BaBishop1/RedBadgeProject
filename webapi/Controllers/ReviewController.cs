@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using webapi.Models.Reviews;
-using webapi.Models.Reviews;
 using webapi.Services.Review;
 using webapi.Services.Token;
 
@@ -57,6 +56,7 @@ namespace webapi.Controllers
             return Ok(reviewDetail);
         }
         [HttpPut("{reviewId:int}")]
+        [Authorize(Policy = "CustomAdminEntity")]
         public async Task<IActionResult> UpdateReviewById([FromRoute] int reviewId, [FromBody] ReviewUpdate model)
         {
             if (!ModelState.IsValid)
@@ -68,6 +68,7 @@ namespace webapi.Controllers
                 : BadRequest(ModelState);
         }
         [HttpDelete("{reviewId:int}")]
+        [Authorize(Policy = "CustomAdminEntity")]
         public async Task<IActionResult> DeleteReviewById([FromRoute] int reviewId)
         {
             if (!ModelState.IsValid)

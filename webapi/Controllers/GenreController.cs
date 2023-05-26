@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using webapi.Models.Genres;
 using webapi.Services.Genre;
@@ -20,6 +21,7 @@ namespace webapi.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = "CustomAdminEntity")]
         public async Task<IActionResult> CreateGenre([FromBody] GenreCreate model)
         {
             if (!ModelState.IsValid)
@@ -57,6 +59,7 @@ namespace webapi.Controllers
             return Ok(genreDetail);
         }
         [HttpPut("{genreId:int}")]
+        [Authorize(Policy = "CustomAdminEntity")]
         public async Task<IActionResult> UpdateGenreById([FromRoute] int genreId, [FromBody] GenreUpdate model)
         {
             if (!ModelState.IsValid)
@@ -68,6 +71,7 @@ namespace webapi.Controllers
                 : BadRequest(ModelState);
         }
         [HttpDelete("{genreId:int}")]
+        [Authorize(Policy = "CustomAdminEntity")]
         public async Task<IActionResult> DeleteGenreById([FromRoute] int genreId)
         {
             if (!ModelState.IsValid)

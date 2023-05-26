@@ -14,6 +14,5 @@ namespace webapi.Services.Game
         Task<IEnumerable<GameListItem>> GetGameListByCreatorAsync(int creatorId);
         Task<bool> UpdateGameAsync(int gameId, GameUpdate model);
         Task<bool> DeleteGameAsync(int gameId);
-
     }
 }

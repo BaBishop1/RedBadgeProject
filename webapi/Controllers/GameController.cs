@@ -1,6 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using webapi.Models.Games;
 using webapi.Models.Games;
 using webapi.Services.Game;
 using webapi.Services.Token;
@@ -20,6 +19,7 @@ namespace webapi.Controllers
             _tokenService = tokenService;
         }
         [HttpPost]
+        [Authorize(Policy = "CustomAdminEntity")]
         public async Task<IActionResult> CreateGame([FromBody] GameCreate model)
         {
             if (!ModelState.IsValid)
@@ -57,6 +57,7 @@ namespace webapi.Controllers
             return Ok(gameDetail);
         }
         [HttpPut("{gameId:int}")]
+        [Authorize(Policy = "CustomAdminEntity")]
         public async Task<IActionResult> UpdateGameById([FromRoute] int gameId, [FromBody] GameUpdate model)
         {
             if (!ModelState.IsValid)
@@ -68,6 +69,7 @@ namespace webapi.Controllers
                 : BadRequest(ModelState);
         }
         [HttpDelete("{gameId:int}")]
+        [Authorize(Policy = "CustomAdminEntity")]
         public async Task<IActionResult> DeleteGameById([FromRoute] int gameId)
         {
             if (!ModelState.IsValid)

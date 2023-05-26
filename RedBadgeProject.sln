@@ -3,15 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "reactapp", "reactapp\reactapp.esproj", "{315FAAC2-3E9B-4AF2-A495-DDE5A6867904}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "webapi", "webapi\webapi.csproj", "{5B61C518-FA98-401F-8425-ED9419D4FCA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "webapi.Data", "Data\webapi.Data.csproj", "{72183462-53C0-498D-B2DB-35727A7FED38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "webapi.Data", "Data\webapi.Data.csproj", "{72183462-53C0-498D-B2DB-35727A7FED38}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "webapi.Models", "Models\webapi.Models.csproj", "{8C670307-57A9-4C64-9348-3DE0FC111634}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "webapi.Models", "Models\webapi.Models.csproj", "{8C670307-57A9-4C64-9348-3DE0FC111634}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "webapi.Services", "Services\webapi.Services.csproj", "{F4F458EA-6599-4687-8370-535D7C704396}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "webapi.Services", "Services\webapi.Services.csproj", "{F4F458EA-6599-4687-8370-535D7C704396}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,12 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{315FAAC2-3E9B-4AF2-A495-DDE5A6867904}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{315FAAC2-3E9B-4AF2-A495-DDE5A6867904}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{315FAAC2-3E9B-4AF2-A495-DDE5A6867904}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{315FAAC2-3E9B-4AF2-A495-DDE5A6867904}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{315FAAC2-3E9B-4AF2-A495-DDE5A6867904}.Release|Any CPU.Build.0 = Release|Any CPU
-		{315FAAC2-3E9B-4AF2-A495-DDE5A6867904}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{5B61C518-FA98-401F-8425-ED9419D4FCA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5B61C518-FA98-401F-8425-ED9419D4FCA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B61C518-FA98-401F-8425-ED9419D4FCA9}.Release|Any CPU.ActiveCfg = Release|Any CPU

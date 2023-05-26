@@ -68,10 +68,21 @@ builder.Services.AddAuthorization(options =>
     });
 });
 
+//builder.Services.AddCors(options =>
+//{
+//    options.AddDefaultPolicy(
+//    policy =>
+//        {
+//            policy.WithOrigins("http://localhost:3000/")
+//            .AllowAnyMethod();
+//        });
+//});
+
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo {  Title = "RedBadgeProject", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "RedBadgeProject", Version = "v1" });
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
     {
         Name = "Authorization",
@@ -106,8 +117,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
+
 app.UseHttpsRedirection();
+//app.UseRouting();
+//app.UseCors();
+
 app.UseAuthentication();
+
+
 
 app.UseAuthorization();
 

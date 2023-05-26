@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using webapi.Models.Creators;
@@ -9,6 +10,7 @@ namespace webapi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    
     public class CreatorController : ControllerBase
     {
         private readonly ICreatorService _creatorService;
@@ -20,6 +22,7 @@ namespace webapi.Controllers
             _tokenService = tokenService;
         }
         [HttpPost]
+        [Authorize(Policy = "CustomAdminEntity")]
         public async Task<IActionResult> CreateCreator([FromBody] CreatorCreate model)
         {
             if (!ModelState.IsValid)
@@ -57,6 +60,7 @@ namespace webapi.Controllers
             return Ok(CreatorDetail);
         }
         [HttpPut("{creatorId:int}")]
+        [Authorize(Policy = "CustomAdminEntity")]
         public async Task<IActionResult> UpdateCreatorById([FromRoute] int creatorId,[FromBody] CreatorUpdate model)
         {
             if (!ModelState.IsValid)
@@ -68,6 +72,7 @@ namespace webapi.Controllers
                 : BadRequest(ModelState);
         }
         [HttpDelete("{id:int}")]
+        [Authorize(Policy = "CustomAdminEntity")]
         public async Task<IActionResult> DeleteCreatorById([FromRoute] int creatorId)
         {
             if (!ModelState.IsValid)

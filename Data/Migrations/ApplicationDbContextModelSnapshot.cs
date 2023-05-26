@@ -61,9 +61,14 @@ namespace webapi.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("GenreId")
+                        .HasColumnType("int");
+
                     b.HasKey("GameId");
 
                     b.HasIndex("CreatorId");
+
+                    b.HasIndex("GenreId");
 
                     b.ToTable("Games");
                 });
@@ -76,9 +81,6 @@ namespace webapi.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GenreId"));
 
-                    b.Property<int?>("GameEntityGameId")
-                        .HasColumnType("int");
-
                     b.Property<string>("GenreDescription")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -88,8 +90,6 @@ namespace webapi.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("GenreId");
-
-                    b.HasIndex("GameEntityGameId");
 
                     b.ToTable("Genres");
                 });
@@ -191,14 +191,15 @@ namespace webapi.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Creator");
-                });
+                    b.HasOne("webapi.Data.Entities.GenreEntity", "Genre")
+                        .WithMany()
+                        .HasForeignKey("GenreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-            modelBuilder.Entity("webapi.Data.Entities.GenreEntity", b =>
-                {
-                    b.HasOne("webapi.Data.Entities.GameEntity", null)
-                        .WithMany("Genres")
-                        .HasForeignKey("GameEntityGameId");
+                    b.Navigation("Creator");
+
+                    b.Navigation("Genre");
                 });
 
             modelBuilder.Entity("webapi.Data.Entities.ReviewEntity", b =>
@@ -219,8 +220,6 @@ namespace webapi.Data.Migrations
 
             modelBuilder.Entity("webapi.Data.Entities.GameEntity", b =>
                 {
-                    b.Navigation("Genres");
-
                     b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618

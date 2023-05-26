@@ -14,7 +14,7 @@ namespace webapi.Models.Games
         public int CreatorId { get; set; }
         public string GameTitle { get; set; }
         public string GameDescription { get; set; }
-        public List<GenreEntity> Genres { get; set; }
-        public List<ReviewEntity> Reviews { get; set; }
+        public int GenreId { get; set; }
+        public DateTimeOffset DateUploaded { get; set; }
     }
 }

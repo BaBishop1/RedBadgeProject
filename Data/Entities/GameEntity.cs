@@ -17,7 +17,10 @@ namespace webapi.Data.Entities
         [Required]
         public string GameDescription { get; set; }
         [Required]
-        public virtual List<GenreEntity> Genres { get; set; } = new List<GenreEntity>();
+        [ForeignKey("Genre")]
+        public int GenreId { get; set; }
+        [Required]
+        public virtual GenreEntity Genre { get; set; }
         [Required]
         public virtual List<ReviewEntity> Reviews { get; set; } = new List<ReviewEntity>();
         [Required]

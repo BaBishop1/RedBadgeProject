@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using webapi.Models.Players;
-using webapi.Models.Players;
 using webapi.Services.Player;
 using webapi.Services.Token;
 
@@ -20,6 +19,7 @@ namespace webapi.Controllers
             _tokenService = tokenService;
         }
         [HttpPost]
+        [Authorize(Policy = "CustomAdminEntity")]
         public async Task<IActionResult> CreatePlayer([FromBody] PlayerCreate model)
         {
             if (!ModelState.IsValid)
@@ -57,6 +57,7 @@ namespace webapi.Controllers
             return Ok(playerDetail);
         }
         [HttpPut("{playerId:int}")]
+        [Authorize(Policy = "CustomAdminEntity")]
         public async Task<IActionResult> UpdatePlayerById([FromRoute] int playerId, [FromBody] PlayerUpdate model)
         {
             if (!ModelState.IsValid)
@@ -68,6 +69,7 @@ namespace webapi.Controllers
                 : BadRequest(ModelState);
         }
         [HttpDelete("{playerId:int}")]
+        [Authorize(Policy = "CustomAdminEntity")]
         public async Task<IActionResult> DeletePlayerById([FromRoute] int playerId)
         {
             if (!ModelState.IsValid)

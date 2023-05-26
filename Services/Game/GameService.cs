@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using webapi.Data.Entities;
 using webapi.Models.Games;
-using webapi.Models.Games;
 using webapi.webapi.Data;
 
 namespace webapi.Services.Game
@@ -32,6 +31,7 @@ namespace webapi.Services.Game
                 CreatorId = model.CreatorId,
                 GameTitle = model.GameTitle,
                 GameDescription = model.GameDescription,
+                GenreId = model.GenreId,
                 DateUploaded = model.DateUploaded,
             };
             _dbcontext.Games.Add(gameEntity);
@@ -52,7 +52,8 @@ namespace webapi.Services.Game
                 GameId = game.GameId,
                 GameTitle = game.GameTitle,
                 GameDescription = game.GameDescription,
-                Genres = game.Genres,
+                GenreId = game.GenreId,
+                DateUploaded = game.DateUploaded,
             };
             return gameDetail;
         }
@@ -79,6 +80,7 @@ namespace webapi.Services.Game
                 game.CreatorId = model.CreatorId;
                 game.GameTitle = model.GameTitle;
                 game.GameDescription = model.GameDescription;
+                game.GenreId = model.GenreId;
             }
             var numberOfChanges = await _dbcontext.SaveChangesAsync();
             return numberOfChanges == 1;

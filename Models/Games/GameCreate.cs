@@ -19,6 +19,9 @@ namespace webapi.Models.Games
         [Required]
         public string GameDescription { get; set; }
         [Required]
+        [ForeignKey("GenreId")]
+        public int GenreId { get; set; }
+        [Required]
         public DateTimeOffset DateUploaded { get; set; }
     }
 }
